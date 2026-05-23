@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../utils/extensions/buildcontext.dart';
 import '../../../../domain/enums/shiki_gql.dart';
@@ -26,6 +27,12 @@ class TitleGenres extends StatelessWidget {
               (index) => _GenreChip(
                 genre: genres[index],
                 onTap: () {},
+                // onTap: () => context.pushNamed(
+                //   'explore_search',
+                //   queryParameters: {
+                //     'genreId': '${genres[index].id}',
+                //   },
+                // ),
               ),
             ),
             const SizedBox(

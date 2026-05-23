@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:collection/collection.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../kodik/kodik.dart';
+// popover: 0.3.0
+// import 'package:popover/popover.dart';
+
+import '../../../services/secure_storage/secure_storage_service.dart';
 import '../anime_soures/anime365/anime365_provider.dart';
 import '../../../services/updater/update_service.dart';
 import '../../widgets/mouse_back_button_wrapper.dart';
 import '../../../utils/extensions/buildcontext.dart';
 import '../../widgets/app_update_bottom_sheet.dart';
+import '../../../domain/enums/library_state.dart';
 import '../../providers/settings_provider.dart';
+import '../library/library_page_appbar.dart';
+import '../../widgets/cached_image.dart';
 import '../../../utils/app_utils.dart';
+import '../../../../kodik/kodik.dart';
 import '../player/pip_provider.dart';
+
+import 'animated_branch_container.dart';
 
 class ScaffoldWithNavBar extends ConsumerWidget {
   final StatefulNavigationShell navigationShell;
@@ -26,7 +34,7 @@ class ScaffoldWithNavBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final screenWidth = MediaQuery.of(context).size.width;
+    final screenWidth = MediaQuery.sizeOf(context).width;
 
     const breakpoint = 600.0;
     const expandedBreakpoint = 1200.0;
@@ -168,6 +176,61 @@ class ScaffoldWithNavBar extends ConsumerWidget {
         ),
       ),
     );
+
+    // return Scaffold(
+    //   extendBody: true,
+    //   body: AnimatedBranchContainer(
+    //     currentIndex: navigationShell.currentIndex,
+    //     children: children,
+    //   ),
+    //   bottomNavigationBar: FloatingNavigationBar(
+    //     destinations: [
+    //       FloatingNavigationDestination(
+    //         label: 'Библиотека',
+    //         icon: const Icon(Icons.book_outlined),
+    //         selectedIcon: const Icon(Icons.book),
+    //         onLongPress: (itemContext) => showPopover(
+    //           context: itemContext,
+    //           backgroundColor: context.colorScheme.background,
+    //           direction: PopoverDirection.top,
+    //           transition: PopoverTransition.other,
+    //           radius: 16,
+    //           width: 240,
+    //           // height: 120,
+    //           arrowHeight: 12,
+    //           arrowWidth: 0,
+    //           bodyBuilder: (context) => const LibraryContentPopup()
+    //               .animate()
+    //               .slideY(
+    //                 begin: 0.025,
+    //                 end: 0,
+    //                 duration: const Duration(milliseconds: 250),
+    //                 curve: Curves.easeOutCubic,
+    //               )
+    //               .fade(),
+    //         ),
+    //       ),
+    //       const FloatingNavigationDestination(
+    //         label: 'Обзор',
+    //         icon: Icon(Icons.explore_outlined),
+    //         selectedIcon: Icon(Icons.explore_rounded),
+    //       ),
+    //       const FloatingNavigationDestination(
+    //         label: 'Ещё',
+    //         icon: Icon(Icons.more_horiz),
+    //         // selectedIcon: CircleAvatar(
+    //         //   radius: 10,
+    //         // ),
+    //       ),
+    //       // CircleAvatar(
+    //       //   radius: 12,
+    //       // ),
+    //     ],
+    //     selectedIndex: navigationShell.currentIndex,
+    //     onDestinationSelected: _onDestinationSelected,
+    //     labelBehavior: navDestLabelBehavior,
+    //   ),
+    // );
   }
 
   _onDestinationSelected(int tappedIndex) {
@@ -178,93 +241,90 @@ class ScaffoldWithNavBar extends ConsumerWidget {
   }
 
   // _onDestinationSelected(BuildContext context, int tappedIndex) {
-  //   if (navigationShell.currentIndex == tappedIndex &&
+  //   if (tappedIndex == navigationShell.currentIndex &&
   //       GoRouterState.of(context).uri.toString() == '/explore') {
   //     context.push('/explore/search');
   //     return;
   //   }
 
-  //   if (navigationShell.currentIndex == tappedIndex) {
-  //     navigationShell.shellRouteContext.navigatorKey.currentState
-  //         ?.popUntil((r) => r.isFirst);
-  //   } else {
-  //     navigationShell.goBranch(tappedIndex);
-  //   }
+  //   navigationShell.goBranch(
+  //     tappedIndex,
+  //     initialLocation: tappedIndex == navigationShell.currentIndex,
+  //   );
+
+  //   // if (navigationShell.currentIndex == tappedIndex) {
+  //   //   navigationShell.shellRouteContext.navigatorKey.currentState
+  //   //       ?.popUntil((r) => r.isFirst);
+  //   // } else {
+  //   //   navigationShell.goBranch(tappedIndex);
+  //   // }
   // }
 }
 
-/// Custom branch Navigator container that provides animated transitions
-/// when switching branches.
-class AnimatedBranchContainer extends StatelessWidget {
-  /// Creates a AnimatedBranchContainer
-  const AnimatedBranchContainer({
-    super.key,
-    required this.currentIndex,
-    required this.children,
-  });
-
-  /// The index (in [children]) of the branch Navigator to display.
-  final int currentIndex;
-
-  /// The children (branch Navigators) to display in this container.
-  final List<Widget> children;
+class LibraryContentPopup extends ConsumerWidget {
+  const LibraryContentPopup({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: children.mapIndexed(
-        (int index, Widget navigator) {
-          return TweenAnimationBuilder<double>(
-            tween: Tween<double>(
-              begin: 0.0,
-              end: index == currentIndex ? 1.0 : 0.0,
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(libraryStateProvider);
+
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ListTile(
+            visualDensity: VisualDensity.comfortable,
+            leading: CachedCircleImage(
+              SecureStorageService.instance.userProfileImage,
+              clipBehavior: Clip.antiAlias,
             ),
-            builder: (context, value, child) {
-              // return Transform.translate(
-              //   offset: Offset(0, 20 - (value * 20)),
-              //   child: Opacity(
-              //     opacity: value,
-              //     child: child,
-              //   ),
-              // );
-
-              return Opacity(
-                opacity: value,
-                child: Transform.translate(
-                  offset: Offset(0.0, 16.0 - (value * 16.0)),
-                  child: child,
-                ),
-              );
+            title: Text(
+              SecureStorageService.instance.userNickname,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Divider(height: 1),
+          ),
+          RadioListTile<LibraryFragmentMode>(
+            visualDensity: VisualDensity.comfortable,
+            title: const Text('Аниме'),
+            value: LibraryFragmentMode.anime,
+            groupValue: state,
+            onChanged: (value) {
+              ref.read(libraryStateProvider.notifier).state =
+                  LibraryFragmentMode.anime;
+              Navigator.of(context).pop();
             },
-            curve: Curves.fastOutSlowIn, // fastOutSlowIn
-            duration: const Duration(milliseconds: 400),
-            //duration: const Duration(seconds: 1),
-            child: _branchNavigatorWrapper(index, navigator),
-          );
-        },
-      ).toList(),
-    );
-
-    // return Stack(
-    //   children: children.mapIndexed(
-    //     (int index, Widget navigator) {
-    //       return AnimatedOpacity(
-    //         opacity: index == currentIndex ? 1 : 0,
-    //         duration: const Duration(milliseconds: 300),
-    //         curve: Curves.fastOutSlowIn,
-    //         child: _branchNavigatorWrapper(index, navigator),
-    //       );
-    //     },
-    //   ).toList(),
-    // );
-  }
-
-  Widget _branchNavigatorWrapper(int index, Widget navigator) {
-    return IgnorePointer(
-      ignoring: index != currentIndex,
-      child: TickerMode(
-        enabled: index == currentIndex,
-        child: navigator,
+          ),
+          RadioListTile<LibraryFragmentMode>(
+            visualDensity: VisualDensity.comfortable,
+            title: const Text('Манга и ранобе'),
+            value: LibraryFragmentMode.manga,
+            groupValue: state,
+            onChanged: (value) {
+              ref.read(libraryStateProvider.notifier).state =
+                  LibraryFragmentMode.manga;
+              Navigator.of(context).pop();
+            },
+          ),
+          // ListTile(
+          //   leading: const Icon(Icons.movie_rounded),
+          //   title: const Text('Аниме'),
+          //   onTap: () => Navigator.of(context).pop(),
+          // ),
+          // ListTile(
+          //   leading: const Icon(Icons.menu_book_rounded),
+          //   title: const Text('Манга и ранобе'),
+          //   onTap: () => Navigator.of(context).pop(),
+          // ),
+        ],
       ),
     );
   }

@@ -1,13 +1,13 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:collection/collection.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../utils/extensions/buildcontext.dart';
+import '../../anime_details/anime_franchise_page.dart';
 import '../../../../domain/models/pages_extra.dart';
 import '../../../widgets/cached_image.dart';
-import '../../anime_details/anime_franchise_page.dart';
 import '../graphql_anime.dart';
 
 class TitleRelated extends StatelessWidget {
@@ -115,117 +115,9 @@ class TitleRelated extends StatelessWidget {
           return null;
         }
 
-        return ListTile(
-          onTap: () {
-            final extra = TitleDetailsPageExtra(
-              id: item.title!.id,
-              label: (item.title!.russian == ''
-                      ? item.title!.name
-                      : item.title!.russian) ??
-                  '',
-            );
-
-            if (item.type == RelatedType.manga) {
-              context.pushNamed(
-                'library_manga',
-                pathParameters: <String, String>{
-                  'id': (item.title!.id).toString(),
-                },
-                extra: extra,
-              );
-            } else {
-              context.pushNamed(
-                'library_anime',
-                pathParameters: <String, String>{
-                  'id': (item.title!.id).toString(),
-                },
-                extra: extra,
-              );
-            }
-          },
-          //minVerticalPadding: 0,
-          visualDensity: VisualDensity.compact,
-          leading: SizedBox(
-            width: 48,
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Stack(
-                  fit: StackFit.expand,
-                  children: [
-                    CachedImage(
-                      item.title!.poster ?? 'missing',
-                      titleId: item.type == RelatedType.anime
-                          ? item.title!.id
-                          : null,
-                      memCacheWidth: 144,
-                    ),
-                    Consumer(
-                      builder: (context, ref, child) {
-                        final statusAsync =
-                            ref.watch(relatedUserRateStatusProvider(id));
-
-                        final dot = statusAsync.whenOrNull(
-                          data: (data) {
-                            final status = data
-                                .firstWhereOrNull((e) =>
-                                    item.type == e.type &&
-                                    item.title?.id == e.id)
-                                ?.status;
-
-                            if (status == null) {
-                              return const SizedBox.shrink();
-                            }
-
-                            return Positioned(
-                              top: 4,
-                              left: 4,
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  color: status.color(context.colorScheme),
-                                  shape: BoxShape.circle,
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.black54,
-                                      spreadRadius: 4,
-                                      blurRadius: 4,
-                                      offset: Offset(3, 3),
-                                    ),
-                                  ],
-                                ),
-                                child: const SizedBox.square(dimension: 12),
-                              ),
-                            );
-                          },
-                        );
-
-                        return dot ?? const SizedBox.shrink();
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          title: Text(
-            item.title!.russian ?? item.title!.name,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              fontSize: 14,
-            ),
-          ),
-          subtitle: Text(
-            '${item.title!.kind.rusName} • ${item.relationRu}',
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              fontSize: 12,
-              color: context.colorScheme.onSurfaceVariant,
-            ),
-          ),
-          // trailing: const Icon(Icons.chevron_right_rounded),
+        return TitleRelatedItem(
+          titleId: id,
+          item: item,
         );
       },
     );
@@ -277,118 +169,9 @@ class TitleRelatedBottomSheet extends StatelessWidget {
                     return null;
                   }
 
-                  return ListTile(
-                    onTap: () {
-                      final extra = TitleDetailsPageExtra(
-                        id: title.id,
-                        label: (title.russian == ''
-                                ? title.name
-                                : title.russian) ??
-                            '',
-                      );
-
-                      if (item.type == RelatedType.manga) {
-                        context.pushNamed(
-                          'library_manga',
-                          pathParameters: <String, String>{
-                            'id': (title.id).toString(),
-                          },
-                          extra: extra,
-                        );
-                      } else {
-                        context.pushNamed(
-                          'library_anime',
-                          pathParameters: <String, String>{
-                            'id': (title.id).toString(),
-                          },
-                          extra: extra,
-                        );
-                      }
-                    },
-                    //minVerticalPadding: 0,
-                    visualDensity: VisualDensity.compact,
-                    leading: SizedBox(
-                      width: 48,
-                      child: AspectRatio(
-                        aspectRatio: 1,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8.0),
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              CachedImage(
-                                title.poster ?? 'missing',
-                                titleId: item.type == RelatedType.anime
-                                    ? title.id
-                                    : null,
-                                memCacheWidth: 144,
-                              ),
-                              Consumer(
-                                builder: (context, ref, child) {
-                                  final statusAsync = ref.watch(
-                                      relatedUserRateStatusProvider(titleId));
-
-                                  final dot = statusAsync.whenOrNull(
-                                    data: (data) {
-                                      final status = data
-                                          .firstWhereOrNull((e) =>
-                                              item.type == e.type &&
-                                              item.title?.id == e.id)
-                                          ?.status;
-
-                                      if (status == null) {
-                                        return const SizedBox.shrink();
-                                      }
-
-                                      return Positioned(
-                                        top: 4,
-                                        left: 4,
-                                        child: DecoratedBox(
-                                          decoration: BoxDecoration(
-                                            color: status
-                                                .color(context.colorScheme),
-                                            shape: BoxShape.circle,
-                                            boxShadow: const [
-                                              BoxShadow(
-                                                color: Colors.black54,
-                                                spreadRadius: 4,
-                                                blurRadius: 4,
-                                                offset: Offset(3, 3),
-                                              ),
-                                            ],
-                                          ),
-                                          child: const SizedBox.square(
-                                              dimension: 12),
-                                        ),
-                                      );
-                                    },
-                                  );
-
-                                  return dot ?? const SizedBox.shrink();
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    title: Text(
-                      title.russian ?? title.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 14,
-                      ),
-                    ),
-                    subtitle: Text(
-                      '${title.kind.rusName} • ${item.relationRu}',
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: context.colorScheme.onSurfaceVariant,
-                      ),
-                    ),
+                  return TitleRelatedItem(
+                    titleId: titleId,
+                    item: item,
                   );
                 },
               ),
@@ -416,11 +199,147 @@ class TitleRelatedBottomSheet extends StatelessWidget {
 }
 
 class TitleRelatedItem extends StatelessWidget {
-  const TitleRelatedItem({super.key});
+  const TitleRelatedItem({
+    super.key,
+    required this.titleId,
+    required this.item,
+  });
+
+  final int titleId;
+  final GraphqlRelated item;
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return ListTile(
+      onTap: () {
+        final extra = TitleDetailsPageExtra(
+          id: item.title!.id,
+          label: (item.title!.russian == ''
+                  ? item.title!.name
+                  : item.title!.russian) ??
+              '',
+        );
+
+        if (item.type == RelatedType.manga) {
+          context.pushNamed(
+            'library_manga',
+            pathParameters: <String, String>{
+              'id': (item.title!.id).toString(),
+            },
+            extra: extra,
+          );
+        } else {
+          context.pushNamed(
+            'library_anime',
+            pathParameters: <String, String>{
+              'id': (item.title!.id).toString(),
+            },
+            extra: extra,
+          );
+        }
+      },
+      //minVerticalPadding: 0,
+      visualDensity: VisualDensity.compact,
+      leading: SizedBox(
+        width: 48,
+        child: AspectRatio(
+          aspectRatio: 1,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: CachedImage(
+              item.title!.poster ?? 'missing',
+              titleId: item.type == RelatedType.anime ? item.title!.id : null,
+              memCacheWidth: 144,
+            ),
+          ),
+        ),
+      ),
+      title: Text(
+        item.title!.russian ?? item.title!.name,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: const TextStyle(
+          fontSize: 14,
+        ),
+      ),
+      subtitle: Text(
+        '${item.title!.kind.rusName} • ${item.relationRu}',
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          fontSize: 12,
+          color: context.colorScheme.onSurfaceVariant,
+        ),
+      ),
+      trailing: UserListStatusDot(
+        titleId: titleId,
+        relatedId: item.title?.id ?? 0,
+        relatedType: item.type,
+      ),
+    );
+  }
+}
+
+class UserListStatusDot extends ConsumerWidget {
+  const UserListStatusDot({
+    super.key,
+    required this.titleId,
+    required this.relatedId,
+    required this.relatedType,
+  });
+
+  final int titleId;
+  final int relatedId;
+  final RelatedType relatedType;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final statusAsync = ref.watch(relatedUserRateStatusProvider(titleId));
+
+    final dot = statusAsync.whenOrNull(
+      data: (data) {
+        final status = data
+            .firstWhereOrNull((e) => relatedType == e.type && relatedId == e.id)
+            ?.status;
+
+        if (status == null) {
+          return const SizedBox.shrink();
+        }
+
+        return Container(
+          decoration: BoxDecoration(
+            color: status.color(context.colorScheme),
+            borderRadius: BorderRadius.circular(24),
+          ),
+          padding: const EdgeInsets.symmetric(
+            vertical: 4,
+            horizontal: 12,
+          ),
+          child: Icon(
+            status.icon,
+            size: 18,
+            color: Colors.black87,
+          ),
+        );
+
+        // return DecoratedBox(
+        //   decoration: BoxDecoration(
+        //     color: status.color(context.colorScheme),
+        //     shape: BoxShape.circle,
+        //     // boxShadow: const [
+        //     //   BoxShadow(
+        //     //     color: Colors.black54,
+        //     //     spreadRadius: 4,
+        //     //     blurRadius: 4,
+        //     //     offset: Offset(3, 3),
+        //     //   ),
+        //     // ],
+        //   ),
+        //   child: const SizedBox.square(dimension: 12),
+        // );
+      },
+    );
+    return dot ?? const SizedBox.shrink();
   }
 }
 

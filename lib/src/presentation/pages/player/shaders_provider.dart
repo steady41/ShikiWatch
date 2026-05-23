@@ -98,5 +98,9 @@ final shaderApplicatorProvider = FutureProvider.autoDispose<void>((ref) async {
     '[shaders] set: $targetValue',
   );
 
+  await nativePlayer.setProperty('opengl-pbo', 'yes');
+  await nativePlayer.setProperty('opengl-early-flush', 'no');
+  await nativePlayer.setProperty('vd-lavc-dr', 'yes');
+
   await nativePlayer.setProperty('glsl-shaders', targetValue);
 }, name: 'shaderApplicatorProvider');

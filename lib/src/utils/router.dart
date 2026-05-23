@@ -31,6 +31,7 @@ import '../presentation/pages/profile/user_search.dart';
 import '../presentation/pages/root/root_page.dart';
 import '../presentation/pages/search/anime_filter_page.dart';
 import '../presentation/pages/search/anime_search_page.dart';
+import '../presentation/pages/search_v2/titles_search_page.dart';
 import '../presentation/pages/settings/local_database_manage_page.dart';
 import '../presentation/pages/settings/settings_page.dart';
 import '../presentation/providers/anime_search_provider.dart';
@@ -270,13 +271,31 @@ class RouterNotifier extends AutoDisposeAsyncNotifier<void>
                       name: 'explore_search',
                       path: 'search',
                       pageBuilder: (context, state) {
+                        final studioName =
+                            state.uri.queryParameters['studioName'];
                         final sId = state.uri.queryParameters['studioId'];
                         final gId = state.uri.queryParameters['genreId'];
 
+                        final old = bool.tryParse(
+                                state.uri.queryParameters['old'] ?? 'false') ??
+                            false;
+
+                        if (old) {
+                          return FadeTransitionPage(
+                            key: state.pageKey,
+                            child: AnimeSearchPage(
+                              key: state.pageKey,
+                              studioId: sId == null ? null : int.tryParse(sId),
+                              genreId: gId == null ? null : int.tryParse(gId),
+                            ),
+                          );
+                        }
+
                         return FadeTransitionPage(
                           key: state.pageKey,
-                          child: AnimeSearchPage(
+                          child: TitlesSearchPage(
                             key: state.pageKey,
+                            studioName: studioName,
                             studioId: sId == null ? null : int.tryParse(sId),
                             genreId: gId == null ? null : int.tryParse(gId),
                           ),

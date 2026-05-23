@@ -162,7 +162,7 @@ class MangaDetailPage extends ConsumerWidget {
                   ),
                   SliverPadding(
                     padding: EdgeInsets.only(
-                      bottom: context.padding.bottom,
+                      bottom: context.padding.bottom + 16,
                     ),
                   ),
                 ],

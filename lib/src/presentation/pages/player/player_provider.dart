@@ -245,6 +245,22 @@ class PlayerController extends SafeChangeNotifier {
       // await (player.platform as NativePlayer).setProperty('tls-verify', 'no');
       // //await (player.platform as NativePlayer).setProperty('insecure', 'yes');
 
+      // await (player.platform as NativePlayer).setProperty('sharpen', '0');
+      // await (player.platform as NativePlayer)
+      //     .setProperty('correct-downscaling', 'yes');
+      // await (player.platform as NativePlayer)
+      //     .setProperty('linear-downscaling', 'yes');
+      // await (player.platform as NativePlayer)
+      //     .setProperty('sigmoid-upscaling', 'yes');
+      // await (player.platform as NativePlayer)
+      //     .setProperty('dither-depth', 'auto');
+
+      // await (player.platform as NativePlayer).setProperty('brightness', '8');
+      // await (player.platform as NativePlayer).setProperty('saturation', '15');
+      // await (player.platform as NativePlayer).setProperty('contrast', '-5');
+      // await (player.platform as NativePlayer).setProperty('gamma', '5');
+      // await (player.platform as NativePlayer).setProperty('hue', '5');
+
       if (_playerAndroidNewAudioBackend && Platform.isAndroid) {
         await (player.platform as NativePlayer).setProperty('ao', 'audiotrack');
       }

@@ -166,9 +166,17 @@ class _ExplorePageNewState extends ConsumerState<ExplorePageNew> {
                 pinned: true,
                 title: const Text('ShikiWatch'),
                 actions: [
-                  IconButton(
-                    onPressed: () => context.push('/explore/search'),
-                    icon: const Icon(Icons.search),
+                  GestureDetector(
+                    onLongPress: () => context.pushNamed(
+                      'explore_search',
+                      queryParameters: {
+                        'old': 'true',
+                      },
+                    ),
+                    child: IconButton(
+                      onPressed: () => context.pushNamed('explore_search'),
+                      icon: const Icon(Icons.search),
+                    ),
                   ),
                   if (Toggles.showCalendarButton)
                     IconButton(

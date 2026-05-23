@@ -41,6 +41,17 @@ enum RateStatus {
       _ => Colors.deepPurple.shade300.harmonizeWith(colorScheme.primary),
     };
   }
+
+  IconData get icon {
+    return switch (this) {
+      RateStatus.planned => Icons.event_available_rounded,
+      RateStatus.watching => Icons.remove_red_eye_rounded,
+      RateStatus.rewatching => Icons.refresh_rounded,
+      RateStatus.completed => Icons.done_all_rounded,
+      RateStatus.onHold => Icons.pause_rounded,
+      RateStatus.dropped => Icons.close_rounded,
+    };
+  }
 }
 
 enum AnimeOrigin {
@@ -162,6 +173,22 @@ enum TitleKind {
       TitleKind.oneShot => 'Ваншот',
       TitleKind.doujin => 'Додзинси',
       TitleKind.unknown => 'unknown',
+    };
+  }
+
+  bool get isAnime {
+    return switch (this) {
+      TitleKind.tv ||
+      TitleKind.movie ||
+      TitleKind.ova ||
+      TitleKind.ona ||
+      TitleKind.special ||
+      TitleKind.tvSpecial ||
+      TitleKind.music ||
+      TitleKind.pv ||
+      TitleKind.cm =>
+        true,
+      _ => false,
     };
   }
 }

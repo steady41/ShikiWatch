@@ -174,7 +174,10 @@ class _Studios extends StatelessWidget {
                       //onTap: () {},
                       onTap: () => context.pushNamed(
                         'explore_search',
-                        queryParameters: {'studioId': '${studios[index].id}'},
+                        queryParameters: {
+                          'studioName': studios[index].name,
+                          'studioId': '${studios[index].id}',
+                        },
                       ),
                       borderRadius: BorderRadius.circular(8.0),
                       child: Padding(

@@ -5,7 +5,6 @@ import 'package:network_logger/network_logger.dart';
 
 import '../../../services/secure_storage/secure_storage_service.dart';
 import '../../widgets/custom_search_bar.dart';
-import '../../widgets/donate_widget.dart';
 
 import 'components/current_app_user.dart';
 import 'components/other_more_actions.dart';
@@ -48,10 +47,6 @@ class OtherMorePage extends StatelessWidget {
               sliver: SliverToBoxAdapter(
                 child: OtherMoreActions(),
               ),
-            ),
-            const SliverPadding(
-              padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
-              sliver: SliverToBoxAdapter(child: DonateWidgetNew()),
             ),
             SliverPadding(
               padding: EdgeInsets.only(

@@ -28,7 +28,7 @@ class AppReleaseNotifier extends AsyncNotifier<AppRelease?> {
 
   Future<List<GithubRelease>> _getReleases() async {
     final response = await http.get(Uri.parse(
-        'https://api.github.com/repos/wheremyfiji/ShikiWatch/releases?page=1&per_page=5'));
+        'https://api.github.com/repos/steady41/ShikiWatch/releases?page=1&per_page=5'));
 
     if (response.statusCode == 200) {
       if (response.body.isEmpty) {

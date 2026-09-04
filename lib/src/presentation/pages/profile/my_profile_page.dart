@@ -5,7 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../services/secure_storage/secure_storage_service.dart';
 import '../../../utils/extensions/buildcontext.dart';
 import '../../providers/user_profile_provider.dart';
-import '../../widgets/donate_widget.dart';
 import '../../widgets/error_widget.dart';
 import '../other_more/components/other_more_actions.dart';
 
@@ -77,12 +76,6 @@ class MyProfilePage extends ConsumerWidget {
                     padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
                     sliver: SliverToBoxAdapter(
                       child: OtherMoreActions(),
-                    ),
-                  ),
-                  const SliverPadding(
-                    padding: EdgeInsets.fromLTRB(16, 0, 16, 16),
-                    sliver: SliverToBoxAdapter(
-                      child: DonateWidgetNew(),
                     ),
                   ),
                   // SliverList.builder(

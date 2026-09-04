@@ -31,7 +31,7 @@ class ExplorePage extends ConsumerWidget {
             SliverAppBar.large(
               automaticallyImplyLeading: false,
               pinned: true,
-              title: const Text('ShikiWatch'),
+              title: const Text('ShikiStart'),
               actions: [
                 IconButton(
                   onPressed: () => context.push('/explore/search'),

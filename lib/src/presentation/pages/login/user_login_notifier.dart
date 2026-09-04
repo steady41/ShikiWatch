@@ -69,7 +69,7 @@ class UserLoginNotifier extends StateNotifier<AsyncValue> {
     }
   }
 
-  static const String callbackUrlScheme = 'shikidev';
+  static const String callbackUrlScheme = 'shikistart';
   static const String url =
-      'https://shikimori.io/oauth/authorize?client_id=$kShikiClientId&redirect_uri=shikidev%3A%2F%2Foauth%2Fshikimori&response_type=code&scope=user_rates';
+      'https://shikimori.io/oauth/authorize?client_id=$kShikiClientId&redirect_uri=shikistart%3A%2F%2Foauth%2Fshikimori&response_type=code&scope=user_rates';
 }

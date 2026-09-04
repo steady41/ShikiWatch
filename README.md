@@ -1,5 +1,5 @@
-# ShikiWatch
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/wheremyfiji/ShikiWatch)](https://github.com/wheremyfiji/ShikiWatch/releases/latest/) [![GitHub all releases](https://img.shields.io/github/downloads/wheremyfiji/ShikiWatch/total?label=All%20Downloads)](https://github.com/wheremyfiji/ShikiWatch/releases/latest/) [![Static Badge](https://img.shields.io/badge/Telegram_Group-2AABEE?logo=telegram&logoColor=white)](https://t.me/shikiwatch)
+# ShikiStart
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/steady41/ShikiWatch)](https://github.com/steady41/ShikiWatch/releases/latest/) [![GitHub all releases](https://img.shields.io/github/downloads/steady41/ShikiWatch/total?label=All%20Downloads)](https://github.com/steady41/ShikiWatch/releases/latest/)
 
 Unofficial [Shikimori](https://shikimori.one/) client with online anime watching.
 
@@ -28,7 +28,7 @@ Unofficial [Shikimori](https://shikimori.one/) client with online anime watching
 | :--: | :--: | :--: |
 | <img src="screenshots/scr-andr-player.jpg?raw=true" width="200"/> | <img src="screenshots/scr-andr-user_profile.jpg?raw=true" width="200"/> | <img src="screenshots/scr-andr-local_history.png?raw=true" width="200"/> |
 
-More screenshots in the [screenshots](https://github.com/wheremyfiji/ShikiWatch/tree/master/screenshots) folder.
+More screenshots in the [screenshots](https://github.com/steady41/ShikiWatch/tree/master/screenshots) folder.
 
 ### Windows
 
@@ -36,7 +36,7 @@ Soon.
 
 ## Getting started
 
-1. Download the latest build from the [Releases](https://github.com/wheremyfiji/ShikiWatch/releases) page.
+1. Download the latest build from the [Releases](https://github.com/steady41/ShikiWatch/releases) page.
 2. Launch the app and sign in with your **Shikimori** account.
 3. Enjoy **online streaming** and handy access to your **favorite anime**.
 
@@ -72,7 +72,7 @@ Flutter · Riverpod · GoRouter · MediaKit · Isar · Dio
 
 ## Contributing
 
-Issues and pull requests are welcome. If you like the app, consider supporting development — see the donate section inside the app.
+Issues and pull requests are welcome.
 
 ## License
 

@@ -12,7 +12,7 @@ import 'widgets/shiki_annotate_region_widget.dart';
 import 'providers/settings_provider.dart';
 import 'widgets/app_theme_builder.dart';
 
-//String appTitle = kDebugMode ? 'ShikiDev' : 'ShikiWatch';
+//String appTitle = kDebugMode ? 'ShikiStartDev' : 'ShikiStart';
 
 class ShikiApp extends ConsumerWidget {
   const ShikiApp({super.key});
@@ -42,7 +42,7 @@ class ShikiApp extends ConsumerWidget {
         //checkerboardRasterCacheImages: true,
         theme: appTheme.light,
         darkTheme: oledMode ? appTheme.oled : appTheme.dark,
-        title: kDebugMode ? 'ShikiDev' : 'ShikiWatch',
+        title: kDebugMode ? 'ShikiStartDev' : 'ShikiStart',
         themeMode: themeMode,
         routerConfig: router,
         scrollBehavior: _AppScrollBehavior(),

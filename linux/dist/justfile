@@ -1,5 +1,5 @@
-APP_NAME := "ShikiWatch"
-BINARY_NAME := "ShikiWatch"
+APP_NAME := "ShikiStart"
+BINARY_NAME := "ShikiStart"
 DESKTOP_FILE := "../../linux/dist/app.desktop"
 ICON_FILE := "../../linux/dist/icon-256.png"
 FLUTTER_BUILD_DIR := "../../build/linux/x64/release/bundle"

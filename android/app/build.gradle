@@ -52,7 +52,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "dev.wheremyfiji.shikidev"
+        applicationId "dev.steady41.shikistart"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion 23 //21
@@ -68,11 +68,11 @@ android {
             dimension "default"
             versionNameSuffix "-dev"
             applicationIdSuffix ".dev"
-            resValue "string", "app_name", "Shiki-Dev"
+            resValue "string", "app_name", "ShikiStart Dev"
         }
         prod {
             dimension "default"
-            resValue "string", "app_name", "ShikiWatch"
+            resValue "string", "app_name", "ShikiStart"
         }
     }
 

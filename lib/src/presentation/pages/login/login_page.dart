@@ -47,7 +47,7 @@ class LoginPage extends ConsumerWidget {
                     0.0,
                   ),
                   child: Text(
-                    'ShikiWatch',
+                    'ShikiStart',
                     style: context
                         .textTheme.displayMedium, //headlineLarge  displaySmall
                   ),

@@ -5,10 +5,10 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = shikidev
+PRODUCT_NAME = shikistart
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = dev.wheremyfiji.shikidev
+PRODUCT_BUNDLE_IDENTIFIER = dev.steady41.shikistart
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2024 dev.wheremyfiji. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2026 dev.steady41. All rights reserved.

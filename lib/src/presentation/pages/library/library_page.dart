@@ -29,7 +29,6 @@ class LibraryPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(libraryStateProvider);
-    //final showDonateAlert = ref.watch(showDonateAlertProvider);
 
     final startLibraryFragment = ref
         .watch(settingsProvider.select((settings) => settings.libraryFragment));
@@ -88,20 +87,6 @@ class LibraryPage extends HookConsumerWidget {
                   innerBoxIsScrolled: innerBoxIsScrolled,
                   tabController: tabController,
                 ),
-                // if (showDonateAlert)
-                //   SliverToBoxAdapter(
-                //     child: Padding(
-                //       padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
-                //       //child: DonateWidget(),
-                //       child: FilledButton(
-                //         onPressed: () {
-                //           ref.read(showDonateAlertProvider.notifier).state =
-                //               false;
-                //         },
-                //         child: const Text('close'),
-                //       ),
-                //     ),
-                //   ),
               ];
             },
             body: SafeArea(
@@ -138,12 +123,3 @@ class LibraryPage extends HookConsumerWidget {
     );
   }
 }
-
-// final showDonateAlertProvider = StateProvider<bool>((ref) {
-//   final launchCount = ref.read(preferencesProvider).getAppLaunchCount();
-//   if (launchCount % 12 == 0) {
-//     return true;
-//   }
-
-//   return false;
-// }, name: 'showDonateAlertProvider');

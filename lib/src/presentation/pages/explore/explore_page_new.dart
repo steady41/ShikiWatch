@@ -164,7 +164,7 @@ class _ExplorePageNewState extends ConsumerState<ExplorePageNew> {
               SliverAppBar.large(
                 automaticallyImplyLeading: false,
                 pinned: true,
-                title: const Text('ShikiWatch'),
+                title: const Text('ShikiStart'),
                 actions: [
                   GestureDetector(
                     onLongPress: () => context.pushNamed(

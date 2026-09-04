@@ -985,7 +985,7 @@ class PlayerController extends SafeChangeNotifier {
         button1Label: 'Открыть',
         button1Url: '${AppConfig.staticUrl}/animes/${e.titleInfo.shikimoriId}',
         button2Label: 'че за прила??',
-        button2Url: 'https://github.com/wheremyfiji/ShikiWatch/',
+        button2Url: 'https://github.com/steady41/ShikiWatch/',
       ),
     );
   }
@@ -1158,7 +1158,7 @@ final playerStateProvider =
     NotifierProvider.autoDispose<VideoPlayerNotifier, VideoPlayerState>(() {
   final Player player = Player(
     configuration: const PlayerConfiguration(
-      title: 'ShikiWatch',
+      title: 'ShikiStart',
       libass: true,
       // osc: true,
       bufferSize: 32 * 1024 * 1024,

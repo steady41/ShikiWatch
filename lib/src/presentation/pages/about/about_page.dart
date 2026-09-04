@@ -50,7 +50,7 @@ class AboutPage extends StatelessWidget {
                       .slideY(begin: .1, end: 0, curve: Curves.easeOutCirc),
                   Center(
                     child: Text(
-                      'ShikiWatch',
+                      'ShikiStart',
                       style: context.textTheme.titleLarge?.copyWith(
                         fontWeight: FontWeight.w400,
                       ),

@@ -163,7 +163,7 @@ void initApp() async {
       backgroundColor: Platform.isLinux ? Colors.black : Colors.transparent,
       skipTaskbar: false,
       titleBarStyle: TitleBarStyle.normal,
-      title: 'ShikiWatch',
+      title: 'ShikiStart',
     );
 
     windowManager.waitUntilReadyToShow(windowOptions, () async {

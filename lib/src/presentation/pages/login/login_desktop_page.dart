@@ -50,7 +50,7 @@ Future<void> _launchUrl() async {
 //               crossAxisAlignment: CrossAxisAlignment.start,
 //               children: [
 //                 Text(
-//                   'ShikiWatch',
+//                   'ShikiStart',
 //                   style: context.textTheme.displayLarge,
 //                 ),
 //                 Text(
@@ -186,7 +186,7 @@ class _LoginDesktopPageState extends ConsumerState<LoginDesktopPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'ShikiWatch',
+              'ShikiStart',
               style: context.textTheme.displayLarge,
             ),
             Text(

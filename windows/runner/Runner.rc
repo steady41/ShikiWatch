@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "dev.wheremyfiji" "\0"
-            VALUE "FileDescription", "ShikiWatch" "\0"
+            VALUE "CompanyName", "dev.steady41" "\0"
+            VALUE "FileDescription", "ShikiStart" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "ShikiWatch" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2024 Wheremyfiji. All rights not reserved." "\0"
-            VALUE "OriginalFilename", "shikidev_windows.exe" "\0"
-            VALUE "ProductName", "ShikiWatch" "\0"
+            VALUE "InternalName", "ShikiStart" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2026 steady41. All rights not reserved." "\0"
+            VALUE "OriginalFilename", "shikistart_windows.exe" "\0"
+            VALUE "ProductName", "ShikiStart" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

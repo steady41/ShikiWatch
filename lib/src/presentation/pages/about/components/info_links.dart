@@ -25,17 +25,7 @@ class InfoLinks extends StatelessWidget {
             subtitle: 'Исходный код приложения',
             icon: FontAwesomeIcons.github,
             onTap: () => launchUrlString(
-              'https://github.com/wheremyfiji/ShikiWatch',
-              mode: LaunchMode.externalApplication,
-            ),
-          ),
-          _buildItem(
-            context,
-            title: 'Telegram',
-            subtitle: 'Новые версии, обсуждение и прочее',
-            icon: FontAwesomeIcons.telegram,
-            onTap: () => launchUrlString(
-              'https://t.me/shikiwatch',
+              'https://github.com/steady41/ShikiWatch',
               mode: LaunchMode.externalApplication,
             ),
           ),

@@ -30,7 +30,7 @@ class OAuthService {
         'code': authCode,
         'redirect_uri': AppUtils.instance.isDesktop
             ? 'urn:ietf:wg:oauth:2.0:oob'
-            : 'shikidev://oauth/shikimori',
+            : 'shikistart://oauth/shikimori',
       }),
       headers: headers,
     );

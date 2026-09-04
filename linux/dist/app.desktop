@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=ShikiWatch
-Exec=usr/bin/ShikiWatch
-Icon=ShikiWatch
+Name=ShikiStart
+Exec=usr/bin/ShikiStart
+Icon=ShikiStart
 Type=Application
 Categories=Utility;

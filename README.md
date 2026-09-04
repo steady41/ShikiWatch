@@ -1,23 +1,83 @@
 # ShikiWatch
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/wheremyfiji/ShikiWatch)](https://github.com/wheremyfiji/ShikiWatch/releases/latest/) [![GitHub all releases](https://img.shields.io/github/downloads/wheremyfiji/ShikiWatch/total?label=All%20Downloads)](https://github.com/wheremyfiji/ShikiWatch/releases/latest/) [![Static Badge](https://img.shields.io/badge/Telegram_Group-2AABEE?logo=telegram&logoColor=white)](https://t.me/shikiwatch)
 
-Неофициальное приложение для [Shikimori](https://shikimori.one/) с возможностью онлайн просмотра аниме.
+Unofficial [Shikimori](https://shikimori.one/) client with online anime watching.
 
-### Приложение находится в разработке
+> The app is under active development.
 
-## Как использовать приложение
+## Features
 
-1. Скачайте готовый билд из вкладки [Releases](https://github.com/wheremyfiji/ShikiWatch/releases)
-2. Запустите приложение и войдите в свой аккаунт **Shikimori**
-3. Наслаждайтесь **онлайн просмотром**, а также удобным доступом к **любимому аниме**
+- 📚 Library tracking — anime, manga and ranobe lists synced with your Shikimori profile
+- 🔍 Explore — seasonal charts, top rated titles, calendar and advanced search with filters
+- ▶️ Built-in player — episode navigation, quality selection, playback speed, subtitles
+- 🕘 Local watch history with import/export backup
+- 👤 Profiles — user pages, friends, clubs and watch history
+- 🎨 Material You — dynamic colors, OLED mode, light/dark themes
+- 🖥️ Cross-platform — Android, Windows and Linux builds
+- 🔔 In-app update checker and release notes
 
-### Скриншоты [Ещё](https://github.com/wheremyfiji/ShikiWatch/tree/master/screenshots)
+## Screenshots
 
-#### Android
+### Android
 
-| <img src="screenshots/scr-andr-library.png?raw=true" width="200"/> | <img src="screenshots/scr-andr-anime_info.png?raw=true" width="200"/> | <img src="screenshots/scr-andr-search-filters.png?raw=true" width="200"/> |<img src="screenshots/scr-andr-exp_page.png?raw=true" width="200"/> |
+| Library | Anime info | Search filters | Explore |
 | :--: | :--: | :--: | :--: |
-|Библиотека|Аниме|Фильтры поиска|Главная|
+| <img src="screenshots/scr-andr-library.png?raw=true" width="200"/> | <img src="screenshots/scr-andr-anime_info.png?raw=true" width="200"/> | <img src="screenshots/scr-andr-search-filters.png?raw=true" width="200"/> | <img src="screenshots/scr-andr-exp_page.png?raw=true" width="200"/> |
 
-#### Windows
-soon
+| Player | Profile | Local history |
+| :--: | :--: | :--: |
+| <img src="screenshots/scr-andr-player.jpg?raw=true" width="200"/> | <img src="screenshots/scr-andr-user_profile.jpg?raw=true" width="200"/> | <img src="screenshots/scr-andr-local_history.png?raw=true" width="200"/> |
+
+More screenshots in the [screenshots](https://github.com/wheremyfiji/ShikiWatch/tree/master/screenshots) folder.
+
+### Windows
+
+Soon.
+
+## Getting started
+
+1. Download the latest build from the [Releases](https://github.com/wheremyfiji/ShikiWatch/releases) page.
+2. Launch the app and sign in with your **Shikimori** account.
+3. Enjoy **online streaming** and handy access to your **favorite anime**.
+
+## Build from source
+
+Requirements: [Flutter](https://docs.flutter.dev/get-started/install) 3.16+.
+
+```bash
+# 1. Provide API keys (Shikimori, Kodik, etc.)
+cp secrets.example.json secrets.json
+
+# 2. Install dependencies and generate code
+flutter pub get
+dart run build_runner build --delete-conflicting-outputs
+
+# 3. Run (dev flavor)
+flutter run --flavor dev --dart-define-from-file secrets.json
+
+# 4. Build a release APK
+flutter build apk --flavor prod --split-per-abi --dart-define-from-file secrets.json
+```
+
+Desktop builds:
+
+```bash
+flutter build windows --dart-define-from-file secrets.json
+flutter build linux --dart-define-from-file secrets.json
+```
+
+## Tech stack
+
+Flutter · Riverpod · GoRouter · MediaKit · Isar · Dio
+
+## Contributing
+
+Issues and pull requests are welcome. If you like the app, consider supporting development — see the donate section inside the app.
+
+## License
+
+[MIT](LICENSE)
+
+## Disclaimer
+
+This is a fan-made, unofficial client. It is not affiliated with or endorsed by Shikimori. All anime data and artwork belong to their respective owners.

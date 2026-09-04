@@ -14,25 +14,44 @@ class UserProfileAppBar extends StatelessWidget {
     this.userInfo, {
     super.key,
     required this.title,
+    this.isOwn = false,
     //this.actions,
   });
 
   final UserProfile userInfo;
   final String title;
+  final bool isOwn;
   //final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
+    final canPop = Navigator.canPop(context);
     return SliverAppBar(
       pinned: true,
       expandedHeight: kToolbarHeight * 3,
       automaticallyImplyLeading: false,
-      leading: IconButton(
-        onPressed: () => context.pop(),
-        icon: const Icon(Icons.arrow_back),
-      ),
+      leading: canPop
+          ? IconButton(
+              onPressed: () => context.pop(),
+              icon: const Icon(Icons.arrow_back),
+            )
+          : null,
       //actions: actions,
       actions: [
+        if (isOwn) ...[
+          IconButton(
+            tooltip: 'Поиск пользователей',
+            onPressed: () => context.pushNamed('user_search'),
+            icon: const Icon(Icons.person_search_outlined),
+            iconSize: 22,
+          ),
+          IconButton(
+            tooltip: 'Настройки',
+            onPressed: () => context.pushNamed('profile_settings'),
+            icon: const Icon(Icons.settings_outlined),
+            iconSize: 22,
+          ),
+        ],
         IconButton(
           onPressed: () {
             ShareBottomSheet.show(

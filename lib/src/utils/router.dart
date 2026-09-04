@@ -19,7 +19,6 @@ import '../presentation/pages/library/search/library_anime_search_page.dart';
 import '../presentation/pages/login/login_desktop_page.dart';
 import '../presentation/pages/login/login_page.dart';
 import '../presentation/pages/manga_detail/manga_detail_page.dart';
-import '../presentation/pages/other_more/other_more_page.dart';
 import '../presentation/pages/player/desktop/desktop_player_page.dart';
 import '../presentation/pages/player/domain/player_page_extra.dart';
 import '../presentation/pages/player/mobile/mobile_player_page.dart';
@@ -412,12 +411,8 @@ class RouterNotifier extends AutoDisposeAsyncNotifier<void>
                 GoRoute(
                   name: 'profile',
                   path: '/profile',
-                  // builder: (BuildContext context, GoRouterState state) =>
-                  //     MyProfilePage(
-                  //   key: state.pageKey,
-                  // ),
                   builder: (BuildContext context, GoRouterState state) =>
-                      OtherMorePage(
+                      MyProfilePage(
                     key: state.pageKey,
                   ),
                   routes: <RouteBase>[
